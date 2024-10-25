@@ -15,19 +15,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/categoria")
 public class CategoriaController {
-    
+  
     @Autowired
     private CategoriaService categoriaService;
     
     @GetMapping("/listado")
-    public String listado(Model model) {
-      var lista=categoriaService.getCategorias(false);
-      model.addAttribute("categorias", lista);
-      model.addAttribute("totalCategorias", lista.size());
-      return "/categoria/listado";
+    private String listado(Model model) {
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+        model.addAttribute("totalCategorias",categorias.size());
+        return "/categoria/listado";
     }
     
-        @GetMapping("/nuevo")
+     @GetMapping("/nuevo")
     public String categoriaNuevo(Categoria categoria) {
         return "/categoria/modifica";
     }
@@ -61,5 +61,5 @@ public class CategoriaController {
         categoria = categoriaService.getCategoria(categoria);
         model.addAttribute("categoria", categoria);
         return "/categoria/modifica";
-    }
+    }   
 }
